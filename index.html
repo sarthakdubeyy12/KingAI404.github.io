@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="_ds/nocturne-47b0db0d-2b10-4a34-9a4c-f87ef693b8f2/styles.css">
   <script src="_ds/nocturne-47b0db0d-2b10-4a34-9a4c-f87ef693b8f2/_ds_bundle.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     /* Override font weights for better readability */
     :root {
@@ -49,7 +50,7 @@
     }
     html[data-theme="light"] {
       --color-bg: #ffffff; --color-surface: #f5f5f5; --color-text: #1a1a1a;
-      --color-accent: #ec3013;
+      --color-accent: #cf2b12;
       --color-divider: color-mix(in srgb, #1a1a1a 16%, transparent);
       --color-accent-100: #fef2f1; --color-accent-300: #f9a89a; --color-accent-600: #c02710; --color-accent-700: #9b1f0d; --color-accent-800: #77180a;
       --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px;
@@ -92,6 +93,31 @@
     a:hover { color: var(--color-accent); }
     html[data-theme="dark"] [data-icon="sun"], html:not([data-theme="dark"]) [data-icon="moon"] { display: none; }
     @media (prefers-color-scheme: dark) { html:not([data-theme]) [data-icon="sun"] { display: none; } html:not([data-theme]) [data-icon="moon"] { display: block !important; } }
+
+    /* Hero section theme-aware styles */
+    [data-hero] { background: #161826; color: #e9e9ed; }
+    [data-hero-overlay] { background: linear-gradient(to bottom, rgba(13,15,28,0.35), rgba(13,15,28,0.05) 35%, rgba(13,15,28,0.45) 78%, rgba(10,11,20,0.85)); }
+    [data-hero-heading] { color: #f3f5fe; }
+    [data-hero-accent] { color: #b5abfc; }
+    [data-hero-body] { color: #E9E9EDD9; }
+    [data-hero-muted] { color: rgba(233,233,237,0.6); }
+    [data-hero-btn] { background: #e4e7f5; color: #161826; border: 1px solid #e4e7f5; }
+
+    html[data-theme="light"] [data-hero] { background: #f5f5f5; color: #1a1a1a; }
+    html[data-theme="light"] [data-hero-overlay] { background: linear-gradient(to bottom, rgba(245,245,245,0.2), rgba(255,255,255,0.02) 35%, rgba(245,245,245,0.3) 78%, rgba(245,245,245,0.7)); }
+    html[data-theme="light"] [data-hero-heading] { color: #1a1a1a !important; }
+    html[data-theme="light"] [data-hero-heading] span:not([data-hero-accent]) { color: #1a1a1a !important; }
+    html[data-theme="light"] [data-hero-heading] span[data-hero-accent] { color: #ac2410 !important; }
+    html[data-theme="light"] [data-hero-accent] { color: #d1260c !important; }
+    html[data-theme="light"] [data-hero-body] { color: rgba(26,26,26,0.85) !important; }
+    html[data-theme="light"] [data-hero-muted] { color: rgba(26,26,26,0.5) !important; }
+    html[data-theme="light"] [data-hero-btn] { background: #1a1a1a !important; color: #ffffff !important; border: 1px solid #1a1a1a !important; }
+
+    /* Mobile: shrink hero heading so full name fits on one line */
+    @media (max-width: 480px) {
+      [data-hero-heading] { font-size: 32px !important; }
+      [data-hero-heading] span[style*="font-size"] { font-size: 26px !important; }
+    }
   </style>
 </helmet>
 <a href="#main" style="position:fixed;top:8px;left:8px;z-index:100;background:var(--color-accent);color:var(--color-bg);padding:8px 14px;font-family:var(--font-heading);font-size:14px;text-decoration:none;transform:translateY(-300%)" style-focus="transform:none">Skip to content</a>
@@ -99,16 +125,16 @@
   <svg data-icon="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
   <svg data-icon="moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
 </button>
-<header id="top" aria-label="Introduction" style="position:relative;min-height:96vh;display:flex;flex-direction:column;background:#161826;color:#e9e9ed;overflow:hidden">
+<header id="top" aria-label="Introduction" style="position:relative;min-height:96vh;display:flex;flex-direction:column;overflow:hidden" data-hero>
   <canvas data-hero-bg="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
-  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(13,15,28,0.35), rgba(13,15,28,0.05) 35%, rgba(13,15,28,0.45) 78%, rgba(10,11,20,0.85))"></div>
+  <div data-hero-overlay aria-hidden="true" style="position:absolute;inset:0"></div>
   
   <div style="position:relative;z-index:1;width:100%;max-width:1160px;margin:auto auto 0;padding:clamp(48px,8vw,96px) clamp(24px,5vw,56px) clamp(56px,8vw,96px)">
-    <p style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(42px,7vw,86px);line-height:1.02;letter-spacing:-0.03em;margin:0 0 28px;max-width:1000px;color:#f3f5fe;text-wrap:balance">Shreyansh&nbsp;<span style="letter-spacing: -2.4003px;"><font color="#b5abfc">Shyamsukha<br></font></span><span style="letter-spacing: -2.4003px; font-size: 60px">Scaling </span><span style="letter-spacing: -2.4003px; color: rgb(181, 171, 252); font-size: 60px">AI </span><span style="letter-spacing: -2.4003px; font-size: 60px">startups</span><br style="letter-spacing: -2.4003px;"></p>
-    <p style="max-width:580px;font-size:clamp(17px,2vw,19px);line-height:1.6;margin:0 0 10px;color:rgba(233,233,237,0.85)">Generalist growth operator. 4+ years working directly with founders to build GTM systems, acquire users, and take products from zero to revenue.</p>
+    <p data-hero-heading style="font-family:Archivo,system-ui,sans-serif;font-weight:var(--font-heading-weight);font-size:clamp(40px,7vw,86px);line-height:1.02;letter-spacing:-0.03em;margin:0 0 28px;max-width:1000px;text-wrap:balance;word-wrap:break-word;overflow-wrap:break-word"><span style="font-weight: 800;">Shreyansh&nbsp;<span data-hero-accent style="letter-spacing: -2.4003px;">Shyamsukha<br></span></span><span style="letter-spacing: -2.4003px; font-size: clamp(32px,5.5vw,60px); font-weight: 800;">Scaling </span><span data-hero-accent style="letter-spacing: -2.4003px; font-size: clamp(32px,5.5vw,60px); font-weight: 800;">AI </span><span style="letter-spacing: -2.4003px; font-size: clamp(32px,5.5vw,60px); font-weight: 800;">startups</span><br style="letter-spacing: -2.4003px;"></p>
+    <p data-hero-body style="max-width:950px;font-size:19px;font-family:Archivo,system-ui,sans-serif;line-height:1.6;margin:0 0 10px">Generalist growth operator. 4+ years working directly with founders to<br>build GTM systems, acquire users, and take products from zero to<br>revenue.</p>
     
-    <p style="font-size:14px;margin:0 0 36px;color:rgba(233,233,237,0.6)">Working with teams globally</p><div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a href="#contact" style="display:inline-flex;align-items:center;font-family:var(--font-heading);font-weight:700;font-size:15px;text-decoration:none;padding:14px 28px;background:#e4e7f5;color:#161826;border:1px solid #e4e7f5;border-radius:999px" style-hover="background:#f3f5fe;border-color:#f3f5fe">Work with me</a>
+    <p data-hero-muted style="font-size:14px;font-family:Archivo,system-ui,sans-serif;margin:0 0 36px">Working with teams globally</p><div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a data-hero-btn href="#contact" style="display:inline-flex;align-items:center;font-family:var(--font-heading);font-weight:700;font-size:15px;text-decoration:none;padding:14px 28px;border-radius:999px" style-hover="opacity:0.85">Work with me</a>
       
     </div>
   </div>
@@ -159,7 +185,7 @@
       </article>
       <article>
         <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:10px">
-          <h3 style="font-size:19px;margin:0">Growth &amp; Marketing Adviser,&nbsp; Various&nbsp;<span style="color: rgb(145, 132, 217); letter-spacing: -0.015em;">(</span><span style="color: var(--color-accent); letter-spacing: -0.015em;">GalenAI · LearnUp AI · DEVable)</span><br></h3>
+          <h3 style="font-size:19px;margin:0">Growth &amp; Marketing Adviser,&nbsp; Various&nbsp;<span letter-spacing: -0.015em;"></span><span style="color: var(--color-accent); letter-spacing: -0.015em;">(GalenAI · LearnUp AI · DEVable)</span><br></h3>
           <span style="margin-left:auto;font-size:13px;font-variant-numeric:tabular-nums;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Jun 2024–Present</span>
         </div>
         <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:16px;color:color-mix(in srgb, var(--color-text) 85%, transparent)">
@@ -251,26 +277,38 @@ class Component extends DCLogic {
     if (!w || !h) return;
     c.width = w * dpr; c.height = h * dpr;
     const x = c.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const theme = document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const isLight = theme === 'light';
     const g = x.createLinearGradient(0, 0, 0, h);
-    g.addColorStop(0, '#0d0f1c'); g.addColorStop(0.55, '#161826'); g.addColorStop(1, '#101120');
+    if (isLight) {
+      g.addColorStop(0, '#f5f5f5'); g.addColorStop(0.55, '#f8f8f8'); g.addColorStop(1, '#f2f2f2');
+    } else {
+      g.addColorStop(0, '#0d0f1c'); g.addColorStop(0.55, '#161826'); g.addColorStop(1, '#101120');
+    }
     x.fillStyle = g; x.fillRect(0, 0, w, h);
     // star trails: concentric arcs around a center far above the canvas (seeded, deterministic)
     let s = 42; const R = () => ((s = s * 16807 % 2147483647) / 2147483647);
     const cx = w * 0.62, cy = -h * 0.85;
-    const cols = ['233,233,237', '181,171,252', '145,132,217', '203,213,255', '244,222,186'];
-    for (let i = 0; i < 1100; i++) {
+    const cols = isLight
+      ? ['40,40,40', '200,30,10', '100,70,60', '60,60,60', '180,50,20']
+      : ['233,233,237', '181,171,252', '145,132,217', '203,213,255', '244,222,186'];
+    const arcCount = isLight ? 2400 : 2900;
+    for (let i = 0; i < arcCount; i++) {
       const r = h * (0.9 + R() * 2.4);
       const a0 = Math.PI / 2 - 1.0 + R() * 2.0;
       x.beginPath();
       x.arc(cx, cy, r, a0, a0 + 0.015 + R() * 0.09);
-      x.strokeStyle = 'rgba(' + cols[(R() * cols.length) | 0] + ',' + (0.06 + R() * 0.45).toFixed(2) + ')';
+      const opacity = isLight ? (0.12 + R() * 0.5).toFixed(2) : (0.06 + R() * 0.45).toFixed(2);
+      x.strokeStyle = 'rgba(' + cols[(R() * cols.length) | 0] + ',' + opacity + ')';
       x.lineWidth = R() < 0.85 ? 0.7 : 1.5;
       x.stroke();
     }
     // horizon silhouette
-    x.fillStyle = '#0a0b14';
-    x.beginPath(); x.moveTo(0, h); x.lineTo(0, h * 0.94);
-    x.quadraticCurveTo(w * 0.45, h * 0.88, w, h * 0.95); x.lineTo(w, h); x.closePath(); x.fill();
+    if (!isLight) {
+      x.fillStyle = '#0a0b14';
+      x.beginPath(); x.moveTo(0, h); x.lineTo(0, h * 0.94);
+      x.quadraticCurveTo(w * 0.45, h * 0.88, w, h * 0.95); x.lineTo(w, h); x.closePath(); x.fill();
+    }
   }
   componentDidMount() {
     this.applyTheme();
@@ -306,6 +344,7 @@ class Component extends DCLogic {
         const next = cur === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
         localStorage.setItem('shr-theme', next);
+        this.drawHero();
       }
     };
   }

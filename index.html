@@ -355,9 +355,27 @@ class Component extends DCLogic {
   applyTheme() {
     const stored = localStorage.getItem('shr-theme');
     const dt = this.props.defaultTheme ?? 'system';
-    if (stored) { document.documentElement.setAttribute('data-theme', stored); return; }
-    if (dt === 'system') { document.documentElement.removeAttribute('data-theme'); }
-    else { document.documentElement.setAttribute('data-theme', dt); }
+    let theme;
+    if (stored) { 
+      document.documentElement.setAttribute('data-theme', stored);
+      theme = stored;
+    } else if (dt === 'system') { 
+      document.documentElement.removeAttribute('data-theme');
+      theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } else { 
+      document.documentElement.setAttribute('data-theme', dt);
+      theme = dt;
+    }
+    
+    // Force apply background colors directly to override any external stylesheets
+    const bgColor = theme === 'dark' ? '#161826' : '#ffffff';
+    const textColor = theme === 'dark' ? '#e9e9ed' : '#1a1a1a';
+    document.body.style.setProperty('background-color', bgColor, 'important');
+    document.body.style.setProperty('color', textColor, 'important');
+    const main = document.querySelector('main');
+    const footer = document.querySelector('footer');
+    if (main) main.style.setProperty('background-color', bgColor, 'important');
+    if (footer) footer.style.setProperty('background-color', bgColor, 'important');
   }
   drawHero() {
     const c = document.querySelector('[data-hero-bg]'); if (!c) return;
@@ -438,6 +456,16 @@ class Component extends DCLogic {
         // Change theme
         root.setAttribute('data-theme', next);
         localStorage.setItem('shr-theme', next);
+        
+        // Force apply background colors directly to override any external stylesheets
+        const bgColor = next === 'dark' ? '#161826' : '#ffffff';
+        const textColor = next === 'dark' ? '#e9e9ed' : '#1a1a1a';
+        document.body.style.setProperty('background-color', bgColor, 'important');
+        document.body.style.setProperty('color', textColor, 'important');
+        const main = document.querySelector('main');
+        const footer = document.querySelector('footer');
+        if (main) main.style.setProperty('background-color', bgColor, 'important');
+        if (footer) footer.style.setProperty('background-color', bgColor, 'important');
         
         // Force a style recalculation to batch all changes
         void root.offsetHeight;
